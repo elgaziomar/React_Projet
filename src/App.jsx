@@ -1,22 +1,33 @@
-import logo from './logo.svg'
-import style from './style_module.css'
-import Filiere from './filiere';
+import Affichec from './client';
+import Affichev from './visiteur';
+import {useState} from 'react'
 
+function App(){
+    //const [connect,setConnect]=useState(false)
+    //function changerEtat(){
+    //    setConnect(!connect)}
 
-export default function Header(){
-    let logo=require('./logo.svg');
-    return(
+    //return (
+        //<div>
+            //<button onClick={changerEtat}> {connect ? 'Deconnecter': 'Connecter'}</button>
+           
+            //{connect ? <Affichec nom='omar'/> : <Affichev/>}
+        //<div>
+    // );
+    const [nombre,setNombre]=useState(10);
+    //if setNombre==='+' return {setNombre(nombre+2)}
+    const ajouter=()=>{setNombre(nombre+2)};
+    const diminuer=()=>{setNombre(nombre-1)};
+    return (
         <div>
-            <img src={logo} alt='logo' className={style.logoImg} /><br />
-            <img src={logo} alt='logo' className={style.logoImg} /><br />
-            Welcome To React Basics <br/>
-            <Filiere/>
+            <button onClick={ajouter}>+</button>
+            <p>{nombre}</p>
+            <button onClick={diminuer}>-</button>
         </div>
     );
-   
 
-
-
-
-
+    
 }
+
+
+export default App;
