@@ -34,6 +34,9 @@ function StagiareList(){
         setPrenom('')
         setFilier('')
     }
+    function suppStg(params){
+        setStagiares(stagiares=>stagiares.filter ((stg)=> stg.id !==params))
+    }
 
     return(
         <div>
@@ -66,11 +69,30 @@ function StagiareList(){
                 </div>
                 <button type="submit" >Eneregistrer</button>
             </form>}
-            {
-                stagiares.map((stagiare)=>(
-                <span key={stagiare.id}><StagiareCard stagiare={stagiare}/>
-                </span>))
-            }
+            <br/>
+            <br/>
+            <table border={'1'}>
+                <thead>
+                    <tr>
+                        <th>Nom</th>
+                        <th>Prenom</th>
+                        <th>Filiere</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+          
+                {
+                    stagiares.map((stagiare)=>(
+                    <tr key={stagiare.id}><StagiareCard stagiare={stagiare} onDeleteStg={suppStg}/>
+                        <td>
+                            <button onClick={()=>suppStg(stagiare.id)}>Supprimer</button>
+                        </td>
+
+                    </tr>))
+                }
+                </tbody>
+            </table>
 
         </div>
     
