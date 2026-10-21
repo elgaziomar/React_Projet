@@ -1,62 +1,125 @@
 
-import React, { useState } from "react";
-import Recherche_input from "./recherche_input";
-import Rcherche_select from "./recherche_select";
-import Resultat from "./resultat";
+/*import Fetch from "./fetch";
+import Axios from "./axios";
 
-const initialist=[ {nom:"banane",type:"fruit"}, 
-    {nom:"orange",type:"fruit"}, 
-    {nom:"pomme",type:"fruit"}, 
-    {nom:"raisins",type:"fruit"}, 
-    {nom:"kiwi",type:"fruit"}, 
-    {nom:"tomate",type:"legume"}, 
-    {nom:"carotte",type:"legume"}, 
-    {nom:"pomme de terre",type:"legume"}, 
-    {nom:"navet",type:"legume"}, 
-    {nom:"poivron",type:"legume"} ]
-    
-
-function App() {
-    const [resultats, setResultats] = useState(initialist);
-    const [typeSelectionne, setTypeSelectionne] = useState("");
-    const [term, setTerm] = useState("");
-
-    const handleSearchName = (texte) => {
-        setTerm(texte);
-        filtrer(texte, typeSelectionne);
-    };
-
-    const handleFilterByType = (type) => {
-        setTypeSelectionne(type);
-        filtrer(term, type);
-    };
-
-    const filtrer = (texte, type) => {
-        const filtered = initialist.filter((item) => {
-            const nomCorrespond = item.nom
-                .toLowerCase()
-                .includes(texte.toLowerCase().trim());
-
-            const typeCorrespond =
-                type === "" || item.type === type;
-
-            return nomCorrespond && typeCorrespond;
-        });
-
-        setResultats(filtered);
+export default function App() {
+    const styles = {
+        app: {
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "20px",
+            fontFamily: "Arial, sans-serif",
+        },
+        title: {
+            textAlign: "center",
+            color: "#0f172a",
+        },
+        section: {
+            marginBottom: "40px",
+        },
+        divider: {
+            border: "none",
+            borderTop: "2px solid #e2e8f0",
+            margin: "30px 0",
+        },
     };
 
     return (
-        <div>
-            <h1>Recherche de produits</h1>
+        <div style={styles.app}>
+            <h1 style={styles.title}>My React App</h1>
 
-            <Recherche_input onSearch={handleSearchName} />
+            <section style={styles.section}>
+                <Fetch />
+            </section>
 
-            <Rcherche_select onSelectType={handleFilterByType} />
+            <hr style={styles.divider} />
 
-            <Resultat resultats={resultats} />
+            <section style={styles.section}>
+                <Axios />
+            </section>
         </div>
     );
+}*/
+
+
+import { NameProvider, useName } from "./use_comtext";
+
+// Component 1
+function InputName() {
+  const { name, setName } = useName();
+
+  return (
+    <div>
+      <h3>1. Enter your name</h3>
+      <input
+        type="text"
+        placeholder="Saisir votre nom"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+      />
+    </div>
+  );
 }
 
-export default App;
+// Component 2
+function Bonjour() {
+  const { name } = useName();
+
+  return <h3>2. Bonjour {name}</h3>;
+}
+
+// Component 3
+function Message1() {
+  const { name } = useName();
+
+  return <p>3. Bonjour  {name}</p>;
+}
+
+// Component 4
+function Message2() {
+  const { name } = useName();
+
+  return <p>4. Salam {name}</p>;
+}
+
+// Component 5
+function Message3() {
+  const { name } = useName();
+
+  return <p>5. Marhba  {name}</p>;
+}
+
+// Component 6
+function Message4() {
+  const { name } = useName();
+
+  return <p>6. Ahlan wa sahlan {name}</p>;
+}
+
+// App principale
+export default function App() {
+  return (
+    <NameProvider>
+      <div>
+        <h1>useContext Example</h1>
+
+        <InputName />
+        <hr />
+
+        <Bonjour />
+        <hr />
+
+        <Message1 />
+        <hr />
+
+        <Message2 />
+        <hr />
+
+        <Message3 />
+        <hr />
+
+        <Message4 />
+      </div>
+    </NameProvider>
+  );
+}
