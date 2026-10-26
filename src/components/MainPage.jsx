@@ -3,7 +3,7 @@ import RecipeFilter from "./RecipeFilter";
 import RecipeList from "./RecipeList";
 import RecipeForm from "./RecipeForm";
 import Pagination from "./Pagination";
-import Aide from "./Aide";
+import Aide from "../Aide";
 
 const recettesDepart = [
   {
